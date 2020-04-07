@@ -1,18 +1,18 @@
-package com.pinkfry.tech.fitgym.Activity
+package com.pinkfry.tech.Tezzo.Activity
 
 import android.os.Bundle
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
-import androidx.core.view.GravityCompat
-import androidx.appcompat.app.ActionBarDrawerToggle
+import android.view.Menu
 import android.view.MenuItem
-import androidx.drawerlayout.widget.DrawerLayout
-import com.google.android.material.navigation.NavigationView
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import android.view.Menu
-import com.pinkfry.tech.fitgym.Fragment.FragmentMainScreen
-import com.pinkfry.tech.fitgym.R
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
+import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.navigation.NavigationView
+import com.pinkfry.tech.Tezzo.Fragment.FragmentMainScreen
+import com.pinkfry.tech.Tezzo.R
+import kotlinx.android.synthetic.main.app_bar_main.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -22,12 +22,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         setContentView(R.layout.activity_main)
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
+        window.statusBarColor=resources.getColor(R.color.colorBlack)
+        mainAppBar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener {
+                appBarLayout, verticalOffset ->
+            val range = (-appBarLayout.totalScrollRange).toFloat()
+            imageBackDrop.imageAlpha=(255 * (1.0f -  (verticalOffset / range).toFloat())).toInt()
+        })
 
-        val fab: FloatingActionButton = findViewById(R.id.fab)
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }
+
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
         val toggle = ActionBarDrawerToggle(

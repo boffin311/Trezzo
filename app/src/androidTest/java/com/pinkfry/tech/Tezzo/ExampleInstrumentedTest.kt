@@ -1,4 +1,4 @@
-package com.pinkfry.tech.fitgym
+package com.pinkfry.tech.Tezzo
 
 import androidx.test.InstrumentationRegistry
 import androidx.test.runner.AndroidJUnit4

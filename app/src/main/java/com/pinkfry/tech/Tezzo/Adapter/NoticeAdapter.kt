@@ -1,11 +1,11 @@
-package com.pinkfry.tech.fitgym.Adapter
+package com.pinkfry.tech.Tezzo.Adapter
 
 import android.app.Activity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.pinkfry.tech.fitgym.R
+import com.pinkfry.tech.Tezzo.R
 import kotlinx.android.synthetic.main.adatper_notice.view.*
 
 class NoticeAdapter(private var arrayList:ArrayList<String>):RecyclerView.Adapter<NoticeAdapter.MyHolder>(){

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">FitGym</string>
+    <string name="app_name">Tezzo</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
@@ -23,4 +23,7 @@
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="termsAndConditions">By Clicking the button you agree to the \n <u>Terms and Condition</u> of trezo</string>
+    <string name="packageName">com.pinkfry.tech.tezzo</string>
+    <string name="getStartedHeading">Manage your gym \nin easy way</string>
+    <string name="getStartedSubHeading">Here we will apply some tag line which can we used as a subheading</string>
 </resources>
