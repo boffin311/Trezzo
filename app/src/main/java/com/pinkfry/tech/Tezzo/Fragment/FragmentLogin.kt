@@ -96,6 +96,7 @@ class FragmentLogin :Fragment() {
                     editor.putString("disease",msgItem.disease)
                     editor.apply()
                     Toast.makeText(context,"Login Successful",Toast.LENGTH_SHORT).show()
+                    sharedPreferences.edit().putBoolean("isLoggedIn",true).apply()
                     var intent= Intent(activity, MainActivity::class.java)
                     activity!!.finish()
                     startActivity(intent)
