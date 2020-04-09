@@ -94,6 +94,7 @@ class FragmentLogin :Fragment() {
                     editor.putString("gymId",msgItem.gymId)
                     editor.putString("membershipNo",msgItem.membershipNo)
                     editor.putString("disease",msgItem.disease)
+                    editor.putString("member_id",msgItem.id);
                     editor.apply()
                     Toast.makeText(context,"Login Successful",Toast.LENGTH_SHORT).show()
                     sharedPreferences.edit().putBoolean("isLoggedIn",true).apply()
