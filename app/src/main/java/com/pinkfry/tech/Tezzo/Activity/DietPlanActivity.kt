@@ -49,6 +49,7 @@ class DietPlanActivity : AppCompatActivity() {
                 if(dietResponse!!.isSuccess) {
                     val msgDiet = dietResponse.msg[0]
                     val dietItem:ArrayList<DietItem> = msgDiet.diet as ArrayList<DietItem>
+                    tvPlanName.text=msgDiet.dietName
                     rvTimeBased.layoutManager=LinearLayoutManager(this@DietPlanActivity)
                     gifView.visibility=View.GONE
                     rvTimeBased.adapter=DietTimeAdapter(dietItem,this@DietPlanActivity)
