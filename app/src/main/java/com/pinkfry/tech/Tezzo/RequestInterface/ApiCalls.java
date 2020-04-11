@@ -1,5 +1,6 @@
 package com.pinkfry.tech.Tezzo.RequestInterface;
 
+import com.pinkfry.tech.Tezzo.Model.AttendanceModel;
 import com.pinkfry.tech.Tezzo.Model.DietResponse;
 import com.pinkfry.tech.Tezzo.Model.LoginModel;
 
@@ -16,5 +17,8 @@ public interface ApiCalls {
     @FormUrlEncoded
     @POST("fetch-diet-member")
     Call<DietResponse> getDietData(@Field("member_id") String member_id);
+    @FormUrlEncoded
+    @POST("add-attendance")
+    Call<AttendanceModel> getAttendanceResult(@Field("member_id")String member_id,@Field("gymId")String gymId);
 
 }

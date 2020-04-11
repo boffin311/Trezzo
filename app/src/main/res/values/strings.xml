@@ -26,4 +26,6 @@
     <string name="packageName">com.pinkfry.tech.tezzo</string>
     <string name="getStartedHeading">Manage your gym \nin easy way</string>
     <string name="getStartedSubHeading">Here we will apply some tag line which can we used as a subheading</string>
+    <string name="checkInSuccess">Check in Successful</string>
+
 </resources>

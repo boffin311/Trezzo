@@ -22,5 +22,12 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="SlidingDialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowAnimationStyle">@style/SlidingDialogAnimation</item>
+    </style>
+    <style name="SlidingDialogAnimation">
+        <item name="android:windowEnterAnimation">@anim/translate_y_bottom</item>
+        <item name="android:windowExitAnimation">@anim/translate_y_up</item>
+    </style>
 
 </resources>

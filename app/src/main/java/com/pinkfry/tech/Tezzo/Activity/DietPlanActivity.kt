@@ -1,11 +1,14 @@
 package com.pinkfry.tech.Tezzo.Activity
 
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.zxing.integration.android.IntentIntegrator
 import com.pinkfry.tech.Tezzo.Adapter.DietTimeAdapter
 import com.pinkfry.tech.Tezzo.Model.DietItem
 import com.pinkfry.tech.Tezzo.Model.DietResponse
@@ -31,6 +34,8 @@ class DietPlanActivity : AppCompatActivity() {
             Context.MODE_PRIVATE);
         val memberId=sharedPreferences.getString("member_id","")!!
         getDietResponse(memberId )
+
+
 
 
 
@@ -60,4 +65,6 @@ class DietPlanActivity : AppCompatActivity() {
         })
 
     }
+
+
 }
