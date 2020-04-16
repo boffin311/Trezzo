@@ -17,8 +17,10 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.zxing.integration.android.IntentIntegrator
 import com.pinkfry.tech.Tezzo.Activity.DietPlanActivity
+import com.pinkfry.tech.Tezzo.Activity.WorkOutActivity
 import com.pinkfry.tech.Tezzo.Adapter.NoticeAdapter
 import com.pinkfry.tech.Tezzo.Model.AttendanceModel
+import com.pinkfry.tech.Tezzo.Model.NoticeModel
 import com.pinkfry.tech.Tezzo.R
 import com.pinkfry.tech.Tezzo.RequestInterface.ApiCalls
 import kotlinx.android.synthetic.main.alert_dialogue_attendance.view.*
@@ -61,20 +63,25 @@ class FragmentMainScreen: Fragment() {
                 intentInitiator.initiateScan()
 
         }
+        view.cardWorkout.setOnClickListener {
+            var intent=Intent(activity,WorkOutActivity::class.java)
+            startActivity(intent)
+        }
        view.rvNotice.layoutManager=LinearLayoutManager(context)
-        var arrayList= arrayListOf<String>("Important Notice regarding suspension of classes  Download","Admission Notice 2020-2021 Download","MBA Admission 2020-2021 Download","Date sheet for mid term examination March 2020(Reappear) Download");
-        view.rvNotice.adapter=NoticeAdapter(arrayList);
+        val sharedPreferences=activity!!.getSharedPreferences(resources.getString(R.string.packageName),Context.MODE_PRIVATE)
+
+        getNoticeResponse(sharedPreferences.getString("gymId","")!!)
         return view
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 
-        var result= IntentIntegrator.parseActivityResult(requestCode,resultCode,data)
+        val result= IntentIntegrator.parseActivityResult(requestCode,resultCode,data)
         if(result != null) {
             if(result.contents == null) {
                 Toast.makeText(context, "Cancelled", Toast.LENGTH_LONG).show();
             } else {
 //                Toast.makeText(context, "Scanned: " + result.contents, Toast.LENGTH_LONG).show();
-                var sharedPreferences=activity!!.getSharedPreferences(resources.getString(R.string.packageName),Context.MODE_PRIVATE)
+                val sharedPreferences=activity!!.getSharedPreferences(resources.getString(R.string.packageName),Context.MODE_PRIVATE)
                 getAttendanceResponse(sharedPreferences.getString("member_id","")!!,result.contents)
             }
         }
@@ -107,7 +114,7 @@ class FragmentMainScreen: Fragment() {
         })
 
     }
-    fun checkInAlertDialogue(){
+   private fun checkInAlertDialogue(){
         val layoutInflater=layoutInflater
         val view=layoutInflater.inflate(R.layout.alert_dialogue_attendance,null,false);
 
@@ -116,5 +123,19 @@ class FragmentMainScreen: Fragment() {
         alertDialog.setView(view)
 
 
+    }
+    private fun getNoticeResponse(gymId: String){
+        val retrofit = Retrofit.Builder().addConverterFactory(GsonConverterFactory.create())
+            .baseUrl(" https://api.tezzo.fit/notice/").build()
+        retrofit.create(ApiCalls::class.java).getNoticeData(gymId).enqueue(object :Callback<ArrayList<NoticeModel>>{
+            override fun onFailure(call: Call<ArrayList<NoticeModel>>, t: Throwable) {
+                Toast.makeText(context, "failed " , Toast.LENGTH_LONG).show();
+            }
+
+            override fun onResponse(call: Call<ArrayList<NoticeModel>>, response: Response<ArrayList<NoticeModel>>) {
+               val noticeModel= response.body()!!
+                view!!.rvNotice.adapter=NoticeAdapter(noticeModel,context!!);
+            }
+        })
     }
 }

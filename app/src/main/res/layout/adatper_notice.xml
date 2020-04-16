@@ -1,13 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_width="match_parent"
+        android:id="@+id/linearNotice"
+        android:padding="20dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/modified_edit_text"
         android:layout_height="wrap_content">
+    <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="3"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+    <TextView
+            android:layout_width="match_parent"
+            android:textColor="@color/colorBlack"
+            android:text="Hello"
+            android:fontFamily="sans-serif-black"
+
+            android:id="@+id/tvTitleNotice"
+            android:layout_height="wrap_content"/>
 <TextView
         android:layout_width="match_parent"
        android:textColor="@color/colorBlack"
-        android:text="Hello"
-        android:fontFamily="sans-serif-black"
-        android:padding="10dp"
-        android:id="@+id/tvSingleNotice"
+        android:text="this is the description of the notice"
+
+        android:id="@+id/tvDescriptionNotice"
         android:layout_height="wrap_content"/>
+    </LinearLayout>
+    <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:textColor="@color/colorBlack"
+            android:text="Hello"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:id="@+id/tvDateNotice"
+            android:layout_height="wrap_content"/>
 </LinearLayout>

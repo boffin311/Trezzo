@@ -3,6 +3,10 @@ package com.pinkfry.tech.Tezzo.RequestInterface;
 import com.pinkfry.tech.Tezzo.Model.AttendanceModel;
 import com.pinkfry.tech.Tezzo.Model.DietResponse;
 import com.pinkfry.tech.Tezzo.Model.LoginModel;
+import com.pinkfry.tech.Tezzo.Model.NoticeModel;
+import com.pinkfry.tech.Tezzo.Model.WorkOutModel;
+
+import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -20,5 +24,11 @@ public interface ApiCalls {
     @FormUrlEncoded
     @POST("add-attendance")
     Call<AttendanceModel> getAttendanceResult(@Field("member_id")String member_id,@Field("gymId")String gymId);
+    @FormUrlEncoded
+    @POST("all-notice")
+    Call<ArrayList<NoticeModel>> getNoticeData(@Field("gymId")String gymId);
+    @FormUrlEncoded
+    @POST("fetch-workout-member")
+    Call<WorkOutModel> getWorkOut(@Field("member_id")String member_id);
 
 }
