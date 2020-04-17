@@ -29,7 +29,9 @@ import com.pinkfry.tech.Tezzo.Model.NoticeModel
 import com.pinkfry.tech.Tezzo.R
 import com.pinkfry.tech.Tezzo.RequestInterface.ApiCalls
 import kotlinx.android.synthetic.main.alert_dialogue_attendance.view.*
+import kotlinx.android.synthetic.main.content_main.*
 import kotlinx.android.synthetic.main.content_main.view.*
+import kotlinx.android.synthetic.main.content_main.view.noInternetImage
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -76,7 +78,12 @@ class FragmentMainScreen: Fragment() {
          sharedPreferences=activity!!.getSharedPreferences(resources.getString(R.string.packageName),Context.MODE_PRIVATE)
 
         getNoticeResponse(sharedPreferences.getString("gymId","")!!)
+        view.tvRetry.setOnClickListener {
+            customDialogProgressBar.show()
+            getNoticeResponse(sharedPreferences.getString("gymId","")!!)
+        }
         return view
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -96,10 +103,10 @@ class FragmentMainScreen: Fragment() {
         else {
             super.onActivityResult(requestCode, resultCode, data)
         }
-        if ((requestCode==613)  and (resultCode== Activity.RESULT_OK )){
-            val gymId=sharedPreferences.getString("gymId","")!!
-            getNoticeResponse(gymId)
-        }
+//        if ((requestCode==613)  and (resultCode== Activity.RESULT_OK )){
+//            val gymId=sharedPreferences.getString("gymId","")!!
+//            getNoticeResponse(gymId)
+//        }
     }
     fun getAttendanceResponse(member_id:String,gymId:String) {
         val retrofit = Retrofit.Builder().addConverterFactory(GsonConverterFactory.create())
@@ -145,12 +152,16 @@ class FragmentMainScreen: Fragment() {
         retrofit.create(ApiCalls::class.java).getNoticeData(gymId).enqueue(object :Callback<ArrayList<NoticeModel>>{
             override fun onFailure(call: Call<ArrayList<NoticeModel>>, t: Throwable) {
 //                Toast.makeText(context, "failed " , Toast.LENGTH_LONG).show();
-                val intent=Intent(activity,NoInternetScreen::class.java)
-                startActivityForResult(intent,613);
+//                val intent=Intent(activity,NoInternetScreen::class.java)
+//                startActivityForResult(intent,613);
+                customDialogProgressBar.dismiss()
+                  view!!.linearNoticeNoInterent.visibility=View.VISIBLE
             }
 
             override fun onResponse(call: Call<ArrayList<NoticeModel>>, response: Response<ArrayList<NoticeModel>>) {
                val noticeModel= response.body()!!
+                view!!.linearNoticeNoInterent.visibility=View.GONE
+                customDialogProgressBar.dismiss()
                 view!!.rvNotice.adapter=NoticeAdapter(noticeModel,context!!);
             }
         })

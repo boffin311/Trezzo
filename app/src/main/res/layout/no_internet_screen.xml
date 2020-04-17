@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:id="@+id/linearNoInternet"
+        android:gravity="center"
+        android:layout_height="match_parent">
+
+        <ImageView
+                android:layout_width="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/no_internet_modified"
+                android:layout_gravity="center"
+                android:layout_height="200dp"/>
+        <TextView
+                android:layout_width="match_parent"
+                android:text="@string/noInternetConnection"
+                android:textColor="@color/colorBlack"
+                android:textStyle="bold"
+                android:fontFamily="sans-serif-medium"
+                android:textSize="30sp"
+                android:gravity="center"
+                android:layout_height="wrap_content"/>
+        <TextView
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:textColor="@color/colorBlack"
+                android:textSize="12sp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:text="@string/noInternetConnectionSubhead"
+                android:layout_height="wrap_content"/>
+        <TextView
+                android:id="@+id/tvRetry"
+                android:layout_width="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_gravity="center"
+                android:paddingStart="60dp"
+
+                android:paddingEnd="60dp"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:fontFamily="sans-serif-medium"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+
+                android:text="Retry"
+                android:textColor="@color/colorPrimary"
+                android:background="@drawable/modified_rounded_button"
+                android:layout_height="wrap_content"/>
+
+</LinearLayout>
