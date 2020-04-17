@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.pinkfry.tech.Tezzo.Activity.MainActivity
+import com.pinkfry.tech.Tezzo.Activity.NoInternetScreen
 import com.pinkfry.tech.Tezzo.Model.LoginModel
 import com.pinkfry.tech.Tezzo.R
 import com.pinkfry.tech.Tezzo.RequestInterface.ApiCalls
@@ -26,17 +27,15 @@ import retrofit2.converter.gson.GsonConverterFactory
 class FragmentLogin :Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            val decor: View = activity!!.window.decorView
-            decor.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-            activity!!.window.statusBarColor=resources.getColor(R.color.backgroundColor)
+        val decor: View = activity!!.window.decorView
+        decor.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+        activity!!.window.statusBarColor=resources.getColor(R.color.backgroundColor)
 //            } else {
 //                // We want to change tint color to white again.
 //                // You can also record the flags in advance so that you can turn UI back completely if
 //                // you have set other flags before, such as translucent or full screen.
 //                decor.systemUiVisibility = 0
 //            }
-        }
     }
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -69,7 +68,8 @@ class FragmentLogin :Fragment() {
         retrofit.create(ApiCalls::class.java).getLoginData(mobileNo,gymId).enqueue(object :
             Callback<LoginModel> {
             override fun onFailure(call: Call<LoginModel>, t: Throwable) {
-
+                val intent=Intent(activity, NoInternetScreen::class.java)
+                startActivity(intent);
             }
 
             override fun onResponse(call: Call<LoginModel>, response: Response<LoginModel>) {

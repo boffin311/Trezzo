@@ -1,6 +1,9 @@
 package com.pinkfry.tech.Tezzo.Activity
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -22,7 +25,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class WorkOutActivity : AppCompatActivity() {
-
+lateinit var sharedPreferences:SharedPreferences
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_work_out)
@@ -30,7 +33,7 @@ class WorkOutActivity : AppCompatActivity() {
         decor.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
         window.statusBarColor = resources.getColor(R.color.backgroundColor)
 
-        var sharedPreferences = getSharedPreferences(
+         sharedPreferences = getSharedPreferences(
             resources.getString(R.string.packageName),
             Context.MODE_PRIVATE
         );
@@ -44,8 +47,8 @@ class WorkOutActivity : AppCompatActivity() {
         retrofit.create(ApiCalls::class.java).getWorkOut(member_id).enqueue(object :
             Callback<WorkOutModel> {
             override fun onFailure(call: Call<WorkOutModel>, t: Throwable) {
-                Toast.makeText(this@WorkOutActivity, "No Internet Screen", Toast.LENGTH_SHORT)
-                    .show()
+                val intent= Intent(this@WorkOutActivity,NoInternetScreen::class.java)
+                startActivityForResult(intent,2415);
             }
 
             override fun onResponse(call: Call<WorkOutModel>, response: Response<WorkOutModel>) {
@@ -73,6 +76,14 @@ class WorkOutActivity : AppCompatActivity() {
 
             }
         })
+
+    }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if ((requestCode==2415)  and (resultCode== Activity.RESULT_OK )){
+            val memberId=sharedPreferences.getString("member_id","")!!
+            getWorkOutResponse(memberId)
+        }
 
     }
 

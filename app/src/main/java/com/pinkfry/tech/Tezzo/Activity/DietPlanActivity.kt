@@ -1,7 +1,9 @@
 package com.pinkfry.tech.Tezzo.Activity
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -22,7 +24,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class DietPlanActivity : AppCompatActivity() {
-
+ lateinit var sharedPreferences: SharedPreferences
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_diet_plan)
@@ -30,7 +32,7 @@ class DietPlanActivity : AppCompatActivity() {
         decor.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
         window.statusBarColor=resources.getColor(R.color.backgroundColor)
 
-        var sharedPreferences=getSharedPreferences(resources.getString(R.string.packageName),
+         sharedPreferences=getSharedPreferences(resources.getString(R.string.packageName),
             Context.MODE_PRIVATE);
         val memberId=sharedPreferences.getString("member_id","")!!
         getDietResponse(memberId )
@@ -46,7 +48,8 @@ class DietPlanActivity : AppCompatActivity() {
             .baseUrl(" https://api.tezzo.fit/diet/").build()
         retrofit.create(ApiCalls::class.java).getDietData(member_id).enqueue(object: Callback<DietResponse>{
             override fun onFailure(call: Call<DietResponse>, t: Throwable) {
-
+                val intent=Intent(this@DietPlanActivity,NoInternetScreen::class.java)
+                startActivityForResult(intent,416)
             }
 
             override fun onResponse(call: Call<DietResponse>, response: Response<DietResponse>) {
@@ -64,6 +67,17 @@ class DietPlanActivity : AppCompatActivity() {
             }
         })
 
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if ((requestCode==416)  and (resultCode==Activity.RESULT_OK )){
+            val memberId=sharedPreferences.getString("member_id","")!!
+            getDietResponse(memberId)
+        }
+        else{
+
+        }
     }
 
 

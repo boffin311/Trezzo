@@ -27,5 +27,7 @@
     <string name="getStartedHeading">Manage your gym \nin easy way</string>
     <string name="getStartedSubHeading">Here we will apply some tag line which can we used as a subheading</string>
     <string name="checkInSuccess">Check in Successful</string>
+    <string name="noInternetConnection">No Internet Connection</string>
+    <string name="noInternetConnectionSubhead">You are not connected to the internet. Make sure your wifi is ON \n Airplane Mode is off and try again</string>
 
 </resources>
