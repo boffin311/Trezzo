@@ -19,6 +19,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.zxing.integration.android.IntentIntegrator
+import com.pinkfry.tech.Tezzo.Activity.AttendanceShowActivity
 import com.pinkfry.tech.Tezzo.Activity.DietPlanActivity
 import com.pinkfry.tech.Tezzo.Activity.NoInternetScreen
 import com.pinkfry.tech.Tezzo.Activity.WorkOutActivity
@@ -65,8 +66,10 @@ class FragmentMainScreen: Fragment() {
                startActivity(intent)
            }
         view.cardAttendance.setOnClickListener {
-            val intentInitiator=IntentIntegrator.forSupportFragment(this)
-                intentInitiator.initiateScan()
+//            val intentInitiator=IntentIntegrator.forSupportFragment(this)
+//                intentInitiator.initiateScan()
+            val intent=Intent(activity,AttendanceShowActivity::class.java)
+            startActivity(intent)
 
         }
         Log.d("FMS","I am Here")

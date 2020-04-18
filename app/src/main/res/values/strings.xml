@@ -29,7 +29,7 @@
     <string name="checkInSuccess">Check in Successful</string>
     <string name="noInternetConnection">No Internet Connection</string>
     <string name="noInternetConnectionSubhead">You are not connected to the internet. Make sure your wifi is ON \n Airplane Mode is off and try again</string>
-<string name="enterPassword">Enter Password</string>
+    <string name="enterPassword">Enter Password</string>
     <string name="confirmPassword">Confirm Password</string>
     <string name="changePassword">Change Password</string>
     <string name="passwordDidNotMatch">The password you enter did not match</string>

@@ -18,4 +18,5 @@
     <color name="viewfinder_laser">#ffcc0000</color>
     <color name="viewfinder_mask">#60000000</color>
     <color name="colorNoInternetBackground">#EFFCF3</color>
+    <color name="colorTextLight">#D6D6D6</color>
 </resources>
