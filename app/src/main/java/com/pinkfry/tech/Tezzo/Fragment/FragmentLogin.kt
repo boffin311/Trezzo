@@ -68,8 +68,9 @@ class FragmentLogin :Fragment() {
         retrofit.create(ApiCalls::class.java).getLoginData(mobileNo,gymId).enqueue(object :
             Callback<LoginModel> {
             override fun onFailure(call: Call<LoginModel>, t: Throwable) {
-                val intent=Intent(activity, NoInternetScreen::class.java)
-                startActivity(intent);
+                Toast.makeText(context,"Something went wrong \n Connect to internet and Try Again",Toast.LENGTH_SHORT).show()
+//                val intent=Intent(activity, NoInternetScreen::class.java)
+//                startActivity(intent);
             }
 
             override fun onResponse(call: Call<LoginModel>, response: Response<LoginModel>) {
@@ -98,9 +99,19 @@ class FragmentLogin :Fragment() {
                     editor.apply()
                     Toast.makeText(context,"Login Successful",Toast.LENGTH_SHORT).show()
                     sharedPreferences.edit().putBoolean("isLoggedIn",true).apply()
-                    var intent= Intent(activity, MainActivity::class.java)
-                    activity!!.finish()
-                    startActivity(intent)
+                    var ispasswordChanged=sharedPreferences.getInt("isPasswordChanged",0)
+                    if(ispasswordChanged==0){
+                        var ftrax=activity!!.supportFragmentManager.beginTransaction()
+                        var fragment=FragmentChangePassword()
+                        ftrax.replace(R.id.frameLogin,fragment)
+                        ftrax.commit()
+                    }
+                 else {
+                        var intent = Intent(activity, MainActivity::class.java)
+                        activity!!.finish()
+                        startActivity(intent)
+                    }
+
                 }
                 else{
                     Toast.makeText(context,"User not found ",Toast.LENGTH_SHORT).show()
