@@ -12,22 +12,18 @@
             android:layout_height="match_parent"
             android:id="@+id/linearWholeWorkout"
             android:orientation="vertical">
+<Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+    android:id="@+id/btnScroll">
 
-        <TextView
-                android:layout_width="match_parent"
-                android:textSize="30dp"
-                android:id="@+id/tvPlanName"
-                android:padding="5dp"
-                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-                android:textColor="@color/colorBlack"
-                android:fontFamily="sans-serif-medium"
-                android:layout_height="wrap_content"
-                />
+</Button>
+
         <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:id="@+id/rvDayBased"
+                android:id="@+id/rvSingleWorkoutPlan"
                 />
     </LinearLayout>
     <pl.droidsonroids.gif.GifImageView

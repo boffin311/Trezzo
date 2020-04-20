@@ -7,8 +7,11 @@ import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.HorizontalScrollView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.pinkfry.tech.Tezzo.Adapter.AdapterParticularWorkoutPlan
 import com.pinkfry.tech.Tezzo.Adapter.DietTimeAdapter
 import com.pinkfry.tech.Tezzo.Adapter.WorkoutDayAdapter
 import com.pinkfry.tech.Tezzo.Dialogue.CustomDialogeProgressBar
@@ -36,6 +39,7 @@ lateinit var sharedPreferences:SharedPreferences
         decor.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
         window.statusBarColor = resources.getColor(R.color.backgroundColor)
         customDialogeProgressBar= CustomDialogeProgressBar(this)
+        rvSingleWorkoutPlan.layoutManager = LinearLayoutManager(this@WorkOutActivity)
 
          sharedPreferences = getSharedPreferences(
             resources.getString(R.string.packageName),
@@ -47,7 +51,9 @@ lateinit var sharedPreferences:SharedPreferences
            customDialogeProgressBar.show()
             customDialogeProgressBar.setCancelable(false)
             getWorkOutResponse(memberId)
-
+        }
+        btnScroll.setOnClickListener {
+            rvSingleWorkoutPlan.layoutManager!!.smoothScrollToPosition(rvSingleWorkoutPlan,RecyclerView.State(),1)
         }
     }
 
@@ -73,13 +79,19 @@ lateinit var sharedPreferences:SharedPreferences
                 linearNoInternet.visibility=View.INVISIBLE
                 if (dietResponse!!.isSuccess) {
                     if (dietResponse.msg.size != 0) {
-                        val msgDiet = dietResponse.msg[0]
-                        val singleDayWorkoutModel: ArrayList<SingleDayWorkoutModel> =
-                            msgDiet.workout as ArrayList<SingleDayWorkoutModel>
-                        tvPlanName.text = msgDiet.planName
-                        rvDayBased.layoutManager = LinearLayoutManager(this@WorkOutActivity)
+                        val arrayListOfPlans=ArrayList<MsgWorkOut>()
+                        for(element in dietResponse.msg){
+                            arrayListOfPlans.add(element)
+                        }
+//                        val msgDiet = dietResponse.msg[0]
+//                        val singleDayWorkoutModel: ArrayList<SingleDayWorkoutModel> =
+//                            msgDiet.workout as ArrayList<SingleDayWorkoutModel>
+//                        tvPlanName.text = msgDiet.planName
+
                         gifView.visibility = View.GONE
-                        rvDayBased.adapter = WorkoutDayAdapter(singleDayWorkoutModel, this@WorkOutActivity)
+                        var adapterParticularWorkoutPlan=AdapterParticularWorkoutPlan(arrayListOfPlans, this@WorkOutActivity)
+                        rvSingleWorkoutPlan.adapter = adapterParticularWorkoutPlan
+//                        rvSingleWorkoutPlan.smoothScrollToPosition(1)
 
                     } else {
                         gifView.visibility = View.GONE
@@ -96,13 +108,4 @@ lateinit var sharedPreferences:SharedPreferences
         })
 
     }
-//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-//        super.onActivityResult(requestCode, resultCode, data)
-//        if ((requestCode==2415)  and (resultCode== Activity.RESULT_OK )){
-//            val memberId=sharedPreferences.getString("member_id","")!!
-//            getWorkOutResponse(memberId)
-//        }
-//
-//    }
-
 }

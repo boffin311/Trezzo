@@ -77,7 +77,7 @@ class FragmentMainScreen: Fragment() {
             startActivity(intent)
         }
        view.rvNotice.layoutManager=LinearLayoutManager(context)
-         sharedPreferences=activity!!.getSharedPreferences(resources.getString(R.string.packageName),Context.MODE_PRIVATE)
+         sharedPreferences=requireActivity().getSharedPreferences(resources.getString(R.string.packageName),Context.MODE_PRIVATE)
 
         getNoticeResponse(sharedPreferences.getString("gymId","")!!)
         view.tvRetry.setOnClickListener {
@@ -102,9 +102,14 @@ class FragmentMainScreen: Fragment() {
 
             override fun onResponse(call: Call<ArrayList<NoticeModel>>, response: Response<ArrayList<NoticeModel>>) {
                val noticeModel= response.body()!!
-                view!!.linearNoticeNoInterent.visibility=View.GONE
-                customDialogProgressBar.dismiss()
-                view!!.rvNotice.adapter=NoticeAdapter(noticeModel,context!!);
+                if(view==null){
+                    Toast.makeText(context,"Something went wrong. Restart and Try Again",Toast.LENGTH_SHORT).show()
+                }
+                else {
+                    view!!.linearNoticeNoInterent.visibility = View.GONE
+                    customDialogProgressBar.dismiss()
+                    view!!.rvNotice.adapter = NoticeAdapter(noticeModel, context!!);
+                }
             }
         })
     }
