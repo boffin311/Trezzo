@@ -8,25 +8,32 @@
         android:orientation="vertical"
         tools:context="com.pinkfry.tech.Tezzo.Activity.AttendanceShowActivity">
 
-    <LinearLayout
+    <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="20dp"
-            android:orientation="vertical"
             android:padding="10dp">
 
         <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-black"
+                android:layout_gravity="center|start"
                 android:text="Attendance"
                 android:textColor="@color/colorBlack"
                 android:textSize="25sp"
                 android:textStyle="bold"
                 tools:ignore="HardcodedText" />
+        <ImageView
+                android:layout_width="50dp"
+            android:layout_gravity="end"
+            android:src="@drawable/qr_code_scanner"
+                android:id="@+id/imageQRCodeScanner"
+            android:padding="10dp"
+                android:layout_height="50dp"/>
 
-    </LinearLayout>
+    </FrameLayout>
 
 
     <LinearLayout
@@ -46,6 +53,7 @@
                     android:layout_height="wrap_content"
                 android:textSize="20sp"
                     android:textStyle="bold"
+                    android:id="@+id/tvMonthYear"
                     android:textColor="@color/colorBlack"
                     android:fontFamily="sans-serif-medium"
                 android:text="August 2020"/>
@@ -134,7 +142,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
+
                 android:padding="10dp" />
+        <pl.droidsonroids.gif.GifImageView
+                android:layout_width="40dp"
+            android:layout_gravity="center"
+                android:id="@+id/gifProgress"
+            android:layout_marginTop="50dp"
+                android:src="@drawable/gym_progress_bar"
+                android:layout_height="40dp"/>
     </LinearLayout>
 
 </LinearLayout>

@@ -46,7 +46,6 @@ class FragmentMainScreen: Fragment() {
     lateinit var sharedPreferences:SharedPreferences
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        checkInAlertDialogue()
         customDialogProgressBar=CustomDialogeProgressBar(context)
         customDialogProgressBar.setCancelable(false)
         customDialogProgressBar.window!!.setBackgroundDrawableResource(android.R.color.transparent);
@@ -89,66 +88,6 @@ class FragmentMainScreen: Fragment() {
 
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-
-        val result= IntentIntegrator.parseActivityResult(requestCode,resultCode,data)
-        if(result != null) {
-            if(result.contents == null) {
-                Toast.makeText(context, "Cancelled", Toast.LENGTH_LONG).show();
-            } else {
-//                Toast.makeText(context, "Scanned: " + result.contents, Toast.LENGTH_LONG).show();
-
-                customDialogProgressBar.show()
-                val sharedPreferences=activity!!.getSharedPreferences(resources.getString(R.string.packageName),Context.MODE_PRIVATE)
-                getAttendanceResponse(sharedPreferences.getString("member_id","")!!,result.contents)
-            }
-        }
-        else {
-            super.onActivityResult(requestCode, resultCode, data)
-        }
-//        if ((requestCode==613)  and (resultCode== Activity.RESULT_OK )){
-//            val gymId=sharedPreferences.getString("gymId","")!!
-//            getNoticeResponse(gymId)
-//        }
-    }
-    fun getAttendanceResponse(member_id:String,gymId:String) {
-        val retrofit = Retrofit.Builder().addConverterFactory(GsonConverterFactory.create())
-            .baseUrl(" https://api.tezzo.fit/attendance/").build()
-        retrofit.create(ApiCalls::class.java).getAttendanceResult(member_id,gymId).enqueue(object:
-            Callback<AttendanceModel> {
-            override fun onFailure(call: Call<AttendanceModel>, t: Throwable) {
-                Toast.makeText(context, "It Seems that you are not connected to internet. Connect to internet and TRY AGAIN!!! " , Toast.LENGTH_LONG).show();
-                customDialogProgressBar.dismiss()
-
-            }
-
-            override fun onResponse(call: Call<AttendanceModel>, response: Response<AttendanceModel>) {
-                val attendanceModel=response.body()
-                if(attendanceModel!!.isSuccess) {
-                    val msgDiet = attendanceModel.msg
-                    customDialogProgressBar.dismiss()
-                    alertDialog.show()
-
-                }
-                else{
-                    Toast.makeText(context, "false " , Toast.LENGTH_LONG).show();
-                }
-
-
-            }
-        })
-
-    }
-   private fun checkInAlertDialogue(){
-        val layoutInflater=layoutInflater
-        val view=layoutInflater.inflate(R.layout.alert_dialogue_attendance,null,false);
-
-        view.animation = AnimationUtils.loadAnimation(context,R.anim.dual_scale)
-        alertDialog=AlertDialog.Builder(context).create()
-        alertDialog.setView(view)
-
-
-    }
     private fun getNoticeResponse(gymId: String){
         val retrofit = Retrofit.Builder().addConverterFactory(GsonConverterFactory.create())
             .baseUrl(" https://api.tezzo.fit/notice/").build()
