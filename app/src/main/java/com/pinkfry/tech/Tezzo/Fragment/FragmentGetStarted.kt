@@ -16,8 +16,8 @@ class FragmentGetStarted : Fragment() {
     ): View? {
         val view=inflater.inflate(R.layout.frament_get_started,container,false)
         view.frameGetStared.setOnClickListener{
-            var frgTrxn=activity!!.supportFragmentManager.beginTransaction()
-            frgTrxn.add(R.id.frameLogin,FragmentLogin())
+            var frgTrxn=requireActivity().supportFragmentManager.beginTransaction()
+            frgTrxn.replace(R.id.frameLogin,FragmentLogin())
             frgTrxn.commit()
         }
         return view

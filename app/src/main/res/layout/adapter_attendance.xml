@@ -9,9 +9,7 @@
         android:layout_height="40dp"
         android:text="1"
         android:gravity="center"
-
-        android:background="@drawable/modified_green_indicator"
         android:fontFamily="sans-serif-medium"
     android:textSize="15sp"
-    android:textColor="@color/colorBlack"/>
+    android:textColor="@color/colorWhite"/>
 </LinearLayout>

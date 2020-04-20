@@ -27,9 +27,10 @@ import retrofit2.converter.gson.GsonConverterFactory
 class FragmentLogin :Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val decor: View = activity!!.window.decorView
+        val decor: View = requireActivity().window.decorView
         decor.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-        activity!!.window.statusBarColor=resources.getColor(R.color.backgroundColor)
+        requireActivity().window.statusBarColor=resources.getColor(R.color.backgroundColor)
+        requireActivity().window.setBackgroundDrawableResource(R.drawable.gym_girl_background)
 //            } else {
 //                // We want to change tint color to white again.
 //                // You can also record the flags in advance so that you can turn UI back completely if
@@ -46,8 +47,9 @@ class FragmentLogin :Fragment() {
         view.btngetStarted.setOnClickListener {
             val mobileNo = view.etMobileNumber.text.toString()
             val gymId = view.etGymId.text.toString()
-            if (mobileNo.isNotEmpty() and gymId.isNotEmpty()) {
-                getDataFromLogin(mobileNo, gymId)
+            val password=view.etPassword.text.toString()
+            if (mobileNo.isNotEmpty() and gymId.isNotEmpty() and password.isNotEmpty()) {
+                getDataFromLogin(mobileNo, gymId,password)
 
             } else {
                 if(mobileNo.isEmpty()){
@@ -58,14 +60,17 @@ class FragmentLogin :Fragment() {
 
                     view.etGymId.error = "Enter gymId"
                 }
+                if(password.isEmpty()){
+                    view.etPassword.error="Enter Password "
+                }
             }
         }
         return view
     }
-    fun getDataFromLogin(mobileNo:String,gymId:String){
+    fun getDataFromLogin(mobileNo:String,gymId:String,password: String){
         var retrofit= Retrofit.Builder().baseUrl("https://api.tezzo.fit/member/").addConverterFactory(
             GsonConverterFactory.create()).build()
-        retrofit.create(ApiCalls::class.java).getLoginData(mobileNo,gymId).enqueue(object :
+        retrofit.create(ApiCalls::class.java).getLoginData(mobileNo,gymId,password).enqueue(object :
             Callback<LoginModel> {
             override fun onFailure(call: Call<LoginModel>, t: Throwable) {
                 Toast.makeText(context,"Something went wrong \n Connect to internet and Try Again",Toast.LENGTH_SHORT).show()
@@ -74,8 +79,9 @@ class FragmentLogin :Fragment() {
             }
 
             override fun onResponse(call: Call<LoginModel>, response: Response<LoginModel>) {
-                val loginModel=response.body()!!
-                val isSuccessFull=loginModel.isSuccess
+                val loginModel=response.body()
+                Log.d("FL",response.body().toString())
+                val isSuccessFull=loginModel!!.isSuccess
                 if(isSuccessFull){
                     var msgItem=loginModel.msg[0]
                     Log.d("LA",msgItem.toString())
@@ -114,7 +120,7 @@ class FragmentLogin :Fragment() {
 
                 }
                 else{
-                    Toast.makeText(context,"User not found ",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context,loginModel.data,Toast.LENGTH_SHORT).show()
                 }
 
             }

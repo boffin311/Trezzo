@@ -1,104 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/gym_girl_background"
-        android:orientation="vertical"
+
         tools:context=".Activity.LoginActivity">
 
-
-    <LinearLayout
+    <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
+            android:layout_gravity="bottom">
 
-            android:layout_marginBottom="120dp"
-            android:orientation="vertical"
-           android:padding="30dp">
 
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:padding="5dp"
-                android:background="@drawable/modified_edit_text">
+                android:layout_gravity="bottom"
 
+                android:layout_marginBottom="120dp"
+                android:orientation="vertical"
+                android:padding="30dp">
 
-            <EditText
-                    android:id="@+id/etMobileNumber"
+            <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="@android:color/transparent"
-                    android:hint="Mobile No." />
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/modified_edit_text"
+                    android:padding="5dp">
 
-        </LinearLayout>
 
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/modified_edit_text">
+                <EditText
+                        android:id="@+id/etMobileNumber"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:backgroundTint="@android:color/transparent"
+                        android:hint="Mobile No." />
 
-            <EditText
-                    android:id="@+id/etGymId"
+            </LinearLayout>
+
+            <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="@android:color/transparent"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/modified_edit_text"
+                    android:padding="5dp">
 
-                    android:hint="Gym Id" />
+                <EditText
+                        android:id="@+id/etGymId"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@android:color/transparent"
+                        android:hint="Gym Id"
+                        android:inputType="number" />
 
 
-        </LinearLayout>
+            </LinearLayout>
 
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:padding="5dp"
-                android:background="@drawable/modified_edit_text">
-
-            <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etPassword"
+            <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="@android:color/transparent"
-                    android:hint="Password"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/modified_edit_text"
+                    android:padding="5dp">
 
-                    android:inputType="textPassword" />
+                <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@android:color/transparent"
+                        android:hint="Password"
 
+                        android:inputType="textPassword" />
+
+            </LinearLayout>
+
+            <Button
+                    android:id="@+id/btngetStarted"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/modified_button"
+                    android:text="Log in"
+                    android:textColor="@color/colorWhite" />
+            <!--        <TextView-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_gravity="center"-->
+            <!--                android:padding="2dp"-->
+            <!--                android:shadowColor="@color/backgroundColor"-->
+            <!--                android:shadowDx="3"-->
+            <!--                android:shadowDy="3"-->
+            <!--                android:shadowRadius="40"-->
+            <!--                android:layout_marginTop="30dp"-->
+            <!--                android:textColor="@color/colorBlack"-->
+            <!--                android:gravity="center"-->
+            <!--                android:text="@string/termsAndConditions" />-->
+            <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+
+                    android:src="@drawable/terms_and_condition" />
         </LinearLayout>
 
-        <Button
-                android:id="@+id/btngetStarted"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/modified_button"
-                android:text="Log in"
-                android:textColor="@color/colorWhite" />
-<!--        <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_gravity="center"-->
-<!--                android:padding="2dp"-->
-<!--                android:shadowColor="@color/backgroundColor"-->
-<!--                android:shadowDx="3"-->
-<!--                android:shadowDy="3"-->
-<!--                android:shadowRadius="40"-->
-<!--                android:layout_marginTop="30dp"-->
-<!--                android:textColor="@color/colorBlack"-->
-<!--                android:gravity="center"-->
-<!--                android:text="@string/termsAndConditions" />-->
-<ImageView
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
 
-    android:src="@drawable/terms_and_condition"/>
-        </LinearLayout>
-
-
-
-</FrameLayout>
+    </FrameLayout>
+</ScrollView>

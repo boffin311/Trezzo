@@ -11,6 +11,16 @@ public class LoginModel implements Serializable {
 
 	@SerializedName("success")
 	private boolean success;
+	@SerializedName("data")
+	private  String data;
+
+	public void setData(String data) {
+		this.data = data;
+	}
+
+	public String getData() {
+		return data;
+	}
 
 	public void setMsg(List<MsgItem> msg){
 		this.msg = msg;
@@ -33,7 +43,8 @@ public class LoginModel implements Serializable {
 		return 
 			"LoginModel{" + 
 			"msg = '" + msg + '\'' + 
-			",success = '" + success + '\'' + 
+			",success = '" + success + '\'' +
+			",data= '" +data+ '\'' +
 			"}";
 		}
 }

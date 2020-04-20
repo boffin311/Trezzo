@@ -43,6 +43,9 @@ class AttendanceShowActivity : AppCompatActivity(){
     private val yearArray= arrayOf("2020","2021","2022","2023","2024","2025","2026")
     private lateinit var  alertDialog: AlertDialog.Builder
     lateinit var attendanceDoneAlertDialog:AlertDialog
+     var todayDate:Int=1
+     private var todayMonth:Int=0
+     private var todayYear:Int=2020
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_attendance_show)
@@ -60,17 +63,18 @@ class AttendanceShowActivity : AppCompatActivity(){
         //to find the current month and year
         arrayList= ArrayList()
         val calendar=Calendar.getInstance()
-        val month=calendar.get(Calendar.MONTH)
-        val year=calendar.get(Calendar.YEAR)
-        val firstDayOfMonth=getFirstDayOfCurrentMonth(month,year)
+         todayDate =calendar.get(Calendar.DATE)
+         todayMonth=calendar.get(Calendar.MONTH)
+         todayYear=calendar.get(Calendar.YEAR)
+        val firstDayOfMonth=getFirstDayOfCurrentMonth(todayMonth,todayYear)
 
         //creating arrayList of all the days of the month
-        attachCalendarView(firstDayOfMonth,calendar,month,year)
+        attachCalendarView(firstDayOfMonth,calendar,todayMonth,todayYear)
         rvAttendance.layoutManager=GridLayoutManager(this,7)
 
         //as name suggests
-        getDataForTheAttendanceAndShow(month,year,firstDayOfMonth)
-        tvMonthYear.text="${monthArray[month]}, $year"
+        getDataForTheAttendanceAndShow(todayMonth,todayYear,firstDayOfMonth)
+        tvMonthYear.text="${monthArray[todayMonth]}, $todayYear"
 
 
         linearMonthYear.setOnClickListener {
@@ -82,18 +86,20 @@ class AttendanceShowActivity : AppCompatActivity(){
                 intentInitiator.initiateScan()
         }
 
+        tvUserName.text=getSharedPreferences(resources.getString(R.string.packageName), Context.MODE_PRIVATE).getString("firstName","User")
+
     }
 
     fun attachCalendarView(currentDay: Int,calendar:Calendar,month: Int,year:Int){
         gifProgress.visibility=View.VISIBLE
         rvAttendance.visibility=View.GONE
        arrayList.clear()
-        val lastDayOfPreviousMonth=getLastDayOFPreviousMonth(month,year)-1
+        val lastDayOfPreviousMonth=getLastDayOFPreviousMonth(month,year)
         val dayOfMonth=calendar.getActualMaximum(Calendar.DAY_OF_MONTH)
         for(i in (currentDay-1) downTo 0)
         {
 
-            arrayList.add(lastDayOfPreviousMonth);
+            arrayList.add(lastDayOfPreviousMonth-i);
         }
         for(j in 1..dayOfMonth){
             arrayList.add(j)
@@ -124,8 +130,9 @@ class AttendanceShowActivity : AppCompatActivity(){
         return calendar.getActualMaximum(Calendar.DAY_OF_MONTH)
     }
 
-    private fun getDataForTheAttendanceAndShow(month: Int,year:Int,currentDay:Int){
+    private fun getDataForTheAttendanceAndShow(month: Int,year:Int,firstDayOfMonth:Int){
         arrayAttendance=Array(31){0}
+        var presentCount=0;
         val sharedPreferences=getSharedPreferences(resources.getString(R.string.packageName), Context.MODE_PRIVATE)
         val gymId=sharedPreferences.getString("gymId","")!!
         val memberId=sharedPreferences.getString("member_id","")!!
@@ -144,13 +151,17 @@ class AttendanceShowActivity : AppCompatActivity(){
 
             override fun onDataChange(p0: DataSnapshot) {
                 for(snap in p0.children){
-                    Log.d("ASA","here")
+
                     var index:Int=snap.key!!.toInt()
                     index--
-                    Log.d("ASA","$index")
                     arrayAttendance[index]=snap.getValue(Int::class.java)!!
+                    if(arrayAttendance[index]==1){
+                        ++presentCount
+                    }
                 }
-                rvAttendance.adapter=AttendanceAdapter(arrayList,arrayAttendance,currentDay,this@AttendanceShowActivity)
+                 arcProgress.progress=getArcProgress(presentCount)
+                Log.d("ASA","${getArcProgress(presentCount)}   ${presentCount}")
+                rvAttendance.adapter=AttendanceAdapter(arrayList,arrayAttendance,firstDayOfMonth,todayMonth , todayYear, todayDate, month,year ,this@AttendanceShowActivity)
                 gifProgress.visibility=View.INVISIBLE
                 rvAttendance.visibility=View.VISIBLE
                 ref.removeEventListener(this)
@@ -178,7 +189,7 @@ class AttendanceShowActivity : AppCompatActivity(){
                 position: Int,
                 id: Long
             ) {
-                  Toast.makeText(this@AttendanceShowActivity,parent!!.getItemAtPosition(position).toString(),Toast.LENGTH_SHORT).show()
+//                  Toast.makeText(this@AttendanceShowActivity,parent!!.getItemAtPosition(position).toString(),Toast.LENGTH_SHORT).show()
                 changedMonth=position
             }
         }
@@ -193,8 +204,8 @@ class AttendanceShowActivity : AppCompatActivity(){
                 position: Int,
                 id: Long
             ) {
-                Toast.makeText(this@AttendanceShowActivity,parent!!.getItemAtPosition(position).toString(),Toast.LENGTH_SHORT).show()
-               changedYear=parent.getItemAtPosition(position).toString().toInt()
+//                Toast.makeText(this@AttendanceShowActivity,parent!!.getItemAtPosition(position).toString(),Toast.LENGTH_SHORT).show()
+               changedYear=parent!!.getItemAtPosition(position).toString().toInt()
             }
         }
         val yearAdapter=ArrayAdapter(this,android.R.layout.simple_spinner_item,yearArray)
@@ -207,6 +218,9 @@ class AttendanceShowActivity : AppCompatActivity(){
         ) { dialog, which ->
             val firstDayOfMonth=getFirstDayOfCurrentMonth(changedMonth,changedYear)
             val calendar=Calendar.getInstance()
+            val todayMonth=calendar.get(Calendar.MONTH)
+            val todayDate=calendar.get(Calendar.DATE)
+            val todayYear=calendar.get((Calendar.YEAR))
             calendar.set(changedYear,changedMonth,1)
             tvMonthYear.text="${monthArray[changedMonth]}, $changedYear"
             attachCalendarView(firstDayOfMonth,calendar,changedMonth,changedYear)
@@ -276,6 +290,9 @@ class AttendanceShowActivity : AppCompatActivity(){
 
 
     }
-
+fun getArcProgress(presentDays:Int):Int{
+    var presentDivisible=(presentDays.toFloat()/todayDate.toFloat())
+    return (presentDivisible*100).toInt()
+}
 
 }
