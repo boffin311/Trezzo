@@ -12,12 +12,11 @@
             android:layout_height="match_parent"
             android:id="@+id/linearWholeWorkout"
             android:orientation="vertical">
-<Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-    android:id="@+id/btnScroll">
+        <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:id="@+id/rvAllWorkoutPlans"
+                android:layout_height="wrap_content"/>
 
-</Button>
 
         <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
