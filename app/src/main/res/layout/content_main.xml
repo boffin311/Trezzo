@@ -81,6 +81,28 @@
 
 
         </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_margin="10dp"
+                android:layout_columnWeight="1"
+                android:elevation="5dp"
+                app:cardCornerRadius="10dp"
+                android:id="@+id/cardPayment"
+                android:padding="20dp"
+                android:layout_rowWeight="1"
+                android:layout_height="wrap_content"
+                >
+            <ImageView
+                    android:layout_width="60dp"
+
+                    android:layout_gravity="center"
+                    android:layout_margin="20dp"
+                    android:src="@drawable/paytm_image"
+                    android:layout_height="60dp"/>
+
+
+        </androidx.cardview.widget.CardView>
 
     </LinearLayout>
 
