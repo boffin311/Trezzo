@@ -13,6 +13,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.FirebaseAuthException
 import com.google.firebase.database.annotations.NotNull
 import com.paytm.pgsdk.PaytmOrder
 import com.paytm.pgsdk.PaytmPGService
@@ -128,6 +129,8 @@ class FragmentMainScreen: Fragment() {
         try {
             Log.d(TAG, "onCreate: " + requireActivity().intent.getIntExtra("originalprice", 0))
             jsonValue.put("TXN_AMOUNT", 1)
+            //if you make the authentication than also send cust Id to server
+//            jsonValue.put("CUST_ID",FirebaseAuthException.)
             Log.d(TAG, "onCreate: $jsonValue")
         } catch (e: JSONException) {
             e.printStackTrace()
@@ -178,7 +181,7 @@ class FragmentMainScreen: Fragment() {
                     CALLBACK_URL = jsonObject1.getString("CALLBACK_URL")
                     CHECKSUMHASH = jsonObject1.getString("CHECKSUMHASH")
                     Log.d(TAG, "onResponse: $CHECKSUMHASH")
-                    val paytmPGService: PaytmPGService = PaytmPGService.getStagingService()
+                    val paytmPGService: PaytmPGService = PaytmPGService.getProductionService()
                     val paramMap =
                         HashMap<String, String>()
                     paramMap["MID"] = MID

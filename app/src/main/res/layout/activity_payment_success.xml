@@ -24,7 +24,7 @@
         <ImageView
                 android:layout_width="250dp"
 
-                android:src="@drawable/payment_successful"
+                android:id="@+id/imagePaymentStatus"
                 android:layout_height="200dp" />
         <TextView
                 android:layout_width="match_parent"

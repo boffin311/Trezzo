@@ -33,6 +33,7 @@ val TAG="PSA";
             linearPaymentDone.visibility=View.VISIBLE;
             tvPaymentStatus.text = "Payment Failed"
             tvPaymentStatus.setTextColor(Color.RED)
+imagePaymentStatus.setImageResource(R.drawable.payment_failed)
         }
 
     }
@@ -61,7 +62,9 @@ val TAG="PSA";
                     @NotNull e: IOException?
                 ) {
                     Log.d(TAG, "onFailure: ")
-                    Toast.makeText(this@PaymentSuccessActivity,"Failed response",Toast.LENGTH_SHORT).show()
+//                    Toast.makeText(this@PaymentSuccessActivity,"Something went Wrong,check your ",Toast.LENGTH_SHORT).show()
+                    imagePaymentStatus.setImageResource(R.drawable.no_internet_modified)
+                    tvPaymentStatus.text="Something Went wrong, Try connecting to internet and try again"
                     this@PaymentSuccessActivity.runOnUiThread{ gifProgress.visibility=View.GONE}
                 }
 
@@ -85,8 +88,20 @@ val TAG="PSA";
                             "TXN_SUCCESS" -> {
                                 this@PaymentSuccessActivity.runOnUiThread {
                                     linearPaymentDone.visibility= View.VISIBLE
+                                    imagePaymentStatus.setImageResource(R.drawable.payment_successful)
+                                    tvPaymentStatus.text="Payment Successful"
+                                    tvPaymentStatus.setTextColor(resources.getColor(R.color.result_points))
                                 }
 
+
+                            }
+                            "TXN_FAILURE" ->{
+                                this@PaymentSuccessActivity.runOnUiThread {
+                                    linearPaymentDone.visibility= View.VISIBLE
+//                                    imagePaymentStatus.setImageResource(R.drawable.payment_successful)
+                                    tvPaymentStatus.text = "Payment Processing"
+                                    tvPaymentStatus.setTextColor(Color.GRAY)
+                                }
                             }
                         }
                     } catch (e: JSONException) {
