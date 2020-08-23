@@ -4,6 +4,7 @@ import com.pinkfry.tech.Tezzo.Model.AttendanceModel;
 import com.pinkfry.tech.Tezzo.Model.DietResponse;
 import com.pinkfry.tech.Tezzo.Model.LoginModel;
 import com.pinkfry.tech.Tezzo.Model.NoticeModel;
+import com.pinkfry.tech.Tezzo.Model.PlanResponse;
 import com.pinkfry.tech.Tezzo.Model.WorkOutModel;
 
 import java.util.ArrayList;
@@ -12,6 +13,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 public interface ApiCalls {
@@ -30,5 +32,8 @@ public interface ApiCalls {
     @FormUrlEncoded
     @POST("fetch-workout-member")
     Call<WorkOutModel> getWorkOut(@Field("member_id")String member_id);
+    @FormUrlEncoded
+    @POST("get-plan")
+    Call<PlanResponse> getPlans(@Field("gymId")String gymId);
 
 }
