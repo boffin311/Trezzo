@@ -104,7 +104,8 @@ class PaymentSuccessActivity : AppCompatActivity() {
         val requestBody: RequestBody =
             RequestBody.create(JSON, jsonObject.toString())
         val request: Request = Request.Builder()
-            .url("https://checksum-generator-pinkfry.herokuapp.com/gettxnstatus")
+//            .url("https://checksum-generator-pinkfry.herokuapp.com/gettxnstatus")
+            .url(resources.getString(R.string.paymentBaseUrl,"gettxnstatus"))
             .post(requestBody)
             .build()
         okHttpClient.newCall(request)

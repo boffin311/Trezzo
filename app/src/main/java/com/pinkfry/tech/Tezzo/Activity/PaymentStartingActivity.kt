@@ -135,7 +135,8 @@ class PaymentStartingActivity : AppCompatActivity() {
         Log.d(TAG, "onCreate: $jsonValue")
         val requestBody: RequestBody = RequestBody.create(JSON, jsonValue.toString())
         val request: Request = Request.Builder()
-            .url("https://checksum-generator-pinkfry.herokuapp.com/generate_checksum")
+//            .url("https://checksum-generator-pinkfry.herokuapp.com/generate_checksum")
+            .url(resources.getString(R.string.paymentBaseUrl,"generate_checksum")               )
             .post(requestBody)
             .build()
 
