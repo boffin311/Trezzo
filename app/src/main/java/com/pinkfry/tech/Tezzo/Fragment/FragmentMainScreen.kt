@@ -12,12 +12,17 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.pinkfry.tech.Tezzo.Activity.*
 import com.pinkfry.tech.Tezzo.Adapter.NoticeAdapter
 import com.pinkfry.tech.Tezzo.Dialogue.CustomDialogeProgressBar
 import com.pinkfry.tech.Tezzo.Model.NoticeModel.NoticeModel
 import com.pinkfry.tech.Tezzo.R
 import com.pinkfry.tech.Tezzo.RequestInterface.ApiCalls
+import kotlinx.android.synthetic.main.content_main.*
 import kotlinx.android.synthetic.main.content_main.view.*
 import okhttp3.MediaType
 import retrofit2.Call
@@ -39,6 +44,10 @@ class FragmentMainScreen: Fragment() {
         customDialogProgressBar=CustomDialogeProgressBar(context)
         customDialogProgressBar.setCancelable(false)
         customDialogProgressBar.window!!.setBackgroundDrawableResource(android.R.color.transparent);
+        sharedPreferences=requireActivity().getSharedPreferences(resources.getString(R.string.packageName),Context.MODE_PRIVATE)
+
+
+
     }
 
 
@@ -79,6 +88,30 @@ class FragmentMainScreen: Fragment() {
         view.tvRetry.setOnClickListener {
             customDialogProgressBar.show()
             getNoticeResponse(sharedPreferences.getString("gymId","")!!)
+        }
+
+
+        var dbref=FirebaseDatabase.getInstance().reference
+        Log.d(TAG,sharedPreferences.getString("member_id","")!!);
+
+        dbref.child("REMINDERS").child(sharedPreferences.getString("member_id","")!!).child("status").addValueEventListener(object : ValueEventListener{
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+
+                var value=snapshot.getValue(Int::class.java)
+                Log.d(TAG,"here${value}");
+                if(value==1){
+                    view.tvPaymentDue.visibility=View.VISIBLE
+                }
+                else view.tvPaymentDue.visibility=View.GONE
+            }
+        })
+        view.tvPaymentDue.setOnClickListener {
+var intent=Intent(activity,PaymentDueActivity::class.java)
+            startActivity(intent);
         }
         return view
 
