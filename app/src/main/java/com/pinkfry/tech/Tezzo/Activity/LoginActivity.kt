@@ -1,22 +1,9 @@
 package com.pinkfry.tech.Tezzo.Activity
 
-import android.content.Context
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
 import com.pinkfry.tech.Tezzo.Fragment.FragmentGetStarted
-import com.pinkfry.tech.Tezzo.Model.LoginModel
 import com.pinkfry.tech.Tezzo.R
-import com.pinkfry.tech.Tezzo.RequestInterface.ApiCalls
-import kotlinx.android.synthetic.main.fragment_log_in.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 class LoginActivity : FragmentActivity() {
 

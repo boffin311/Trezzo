@@ -5,15 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
-import android.widget.EditText
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.pinkfry.tech.Tezzo.Model.ItemItem
-import com.pinkfry.tech.Tezzo.Model.WorkoutItem
+import com.pinkfry.tech.Tezzo.Model.WorkOutModel.WorkoutItem
 import com.pinkfry.tech.Tezzo.R
-import kotlinx.android.synthetic.main.activity_work_out.view.*
-import kotlinx.android.synthetic.main.adapter_all_diets.view.*
 import kotlinx.android.synthetic.main.adapter_single_work_out.view.*
 
 class WorkoutItemAdapter(var itemArrayList:ArrayList<WorkoutItem>, var context: Context) : RecyclerView.Adapter<WorkoutItemAdapter.MyHolder>() {

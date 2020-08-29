@@ -7,11 +7,11 @@ import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.pinkfry.tech.Tezzo.Model.ItemItem
+import com.pinkfry.tech.Tezzo.Model.DietModel.ItemItem
 import com.pinkfry.tech.Tezzo.R
 import kotlinx.android.synthetic.main.adapter_all_diets.view.*
 
-class DietItemAdapter(var itemArrayList:ArrayList<ItemItem>,var context: Context) : RecyclerView.Adapter<DietItemAdapter.MyHolder>() {
+class DietItemAdapter(var itemArrayList:ArrayList<ItemItem>, var context: Context) : RecyclerView.Adapter<DietItemAdapter.MyHolder>() {
     class MyHolder(  itemView: View):RecyclerView.ViewHolder(itemView) {
     val tvDietName:TextView=itemView.tvDietName
         val relativeLayoutSingleDiet=itemView.relativeLayoutSingleDiet;

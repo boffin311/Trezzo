@@ -10,13 +10,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pinkfry.tech.Tezzo.Adapter.*
 import com.pinkfry.tech.Tezzo.Dialogue.CustomDialogeProgressBar
-import com.pinkfry.tech.Tezzo.Model.DietResponse
-import com.pinkfry.tech.Tezzo.Model.MsgDiet
+import com.pinkfry.tech.Tezzo.Model.DietModel.DietResponse
+import com.pinkfry.tech.Tezzo.Model.DietModel.MsgDiet
 import com.pinkfry.tech.Tezzo.R
 import com.pinkfry.tech.Tezzo.RequestInterface.ApiCalls
 import kotlinx.android.synthetic.main.activity_diet_plan.*
 import kotlinx.android.synthetic.main.activity_diet_plan.gifView
-import kotlinx.android.synthetic.main.activity_work_out.*
 import kotlinx.android.synthetic.main.no_internet_screen.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -70,7 +69,8 @@ class DietPlanActivity : AppCompatActivity() {
 
     fun getDietResponse(member_id:String) {
         val retrofit = Retrofit.Builder().addConverterFactory(GsonConverterFactory.create())
-            .baseUrl(" https://api.tezzo.fit/diet/").build()
+//            .baseUrl("https://api.tezzo.fit/diet/").build()
+            .baseUrl(resources.getString(R.string.baseUrlServer,"diet/")).build()
         retrofit.create(ApiCalls::class.java).getDietData(member_id).enqueue(object: Callback<DietResponse>{
             override fun onFailure(call: Call<DietResponse>, t: Throwable) {
 //                val intent=Intent(this@DietPlanActivity,NoInternetScreen::class.java)

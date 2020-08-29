@@ -1,10 +1,10 @@
-package com.pinkfry.tech.Tezzo.Model;
+package com.pinkfry.tech.Tezzo.Model.FeeModel;
 
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class AttendanceModel implements Serializable {
+public class PaymentAddedModel implements Serializable {
 
 	@SerializedName("msg")
 	private String msg;
@@ -31,7 +31,7 @@ public class AttendanceModel implements Serializable {
 	@Override
  	public String toString(){
 		return 
-			"AttendanceModel{" + 
+			"PaymentAddedModel{" + 
 			"msg = '" + msg + '\'' + 
 			",success = '" + success + '\'' + 
 			"}";

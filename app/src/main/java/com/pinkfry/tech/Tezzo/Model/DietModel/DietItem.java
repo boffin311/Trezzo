@@ -1,4 +1,4 @@
-package com.pinkfry.tech.Tezzo.Model;
+package com.pinkfry.tech.Tezzo.Model.DietModel;
 
 import java.io.Serializable;
 import java.util.List;

@@ -14,8 +14,8 @@ import com.paytm.pgsdk.PaytmOrder
 import com.paytm.pgsdk.PaytmPGService
 import com.paytm.pgsdk.PaytmPaymentTransactionCallback
 import com.pinkfry.tech.Tezzo.Dialogue.CustomDialogeProgressBar
-import com.pinkfry.tech.Tezzo.Model.DataItem
-import com.pinkfry.tech.Tezzo.Model.PlanResponse
+import com.pinkfry.tech.Tezzo.Model.PlanModel.DataItem
+import com.pinkfry.tech.Tezzo.Model.PlanModel.PlanResponse
 import com.pinkfry.tech.Tezzo.R
 import com.pinkfry.tech.Tezzo.RequestInterface.ApiCalls
 import kotlinx.android.synthetic.main.activity_payment_starting.*
@@ -32,6 +32,7 @@ import java.io.IOException
 class PaymentStartingActivity : AppCompatActivity() {
     lateinit var sharedPreferences: SharedPreferences
     var planPrice: Int = 0;
+    var planName: String="";
     var isSelected = false;
     var size=0;
     lateinit var customDialogProgressBar: CustomDialogeProgressBar
@@ -56,7 +57,7 @@ class PaymentStartingActivity : AppCompatActivity() {
                 override fun onFailure(call: Call<PlanResponse>, t: Throwable) {
                     Toast.makeText(
                         this@PaymentStartingActivity,
-                        "Something went wrong",
+                        "Something went wrong, Check your Network Connection and try Again.",
                         Toast.LENGTH_SHORT
                     ).show()
                 }
@@ -81,6 +82,7 @@ class PaymentStartingActivity : AppCompatActivity() {
             override fun onCheckedChanged(group: RadioGroup?, checkedId: Int) {
                 Log.d(TAG, "${(checkedId-1)%size} ");
                 planPrice = dataitems[(checkedId-1)%size].planPrice
+                planName=planNameToNumberString(dataitems[(checkedId-1)%size].planName)
                 Log.d(TAG,"$planPrice")
 //               val id= group!!.checkedRadioButtonId
 //                val radioButton=findViewById<RadioButton>(id)
@@ -98,7 +100,13 @@ class PaymentStartingActivity : AppCompatActivity() {
             else Toast.makeText(this, "No plan selected", Toast.LENGTH_SHORT).show()
         }
     }
-
+    fun planNameToNumberString(planName:String):String{
+        var i=0;
+        while(planName[i]!=' '){
+            i++
+        }
+        return (planName.substring(0,i))
+    }
     fun makeRadioButton(plan: String, isCheck: Boolean, index: Int) {
         var radioButton = RadioButton(this);
         radioButton.text = plan
@@ -191,7 +199,7 @@ class PaymentStartingActivity : AppCompatActivity() {
                         true,
                         object : PaytmPaymentTransactionCallback {
                             override fun onTransactionResponse(inResponse: Bundle) {
-                                Log.d(TAG, "onTransactionResponse: $inResponse")
+                                Log.d(TAG, "onTransactionResponse: ${inResponse}")
                                 val status = inResponse.getString("STATUS");
 
                                 this@PaymentStartingActivity.runOnUiThread {
@@ -209,6 +217,7 @@ class PaymentStartingActivity : AppCompatActivity() {
                                         finish()
                                         intent.putExtra("inResponse", inResponse)
                                         intent.putExtra("status", 1)
+                                        intent.putExtra("planName",planName)
                                         startActivity(intent)
                                     } else {
 

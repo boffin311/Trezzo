@@ -8,11 +8,11 @@ import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.LinearLayout
 import androidx.recyclerview.widget.RecyclerView
-import com.pinkfry.tech.Tezzo.Model.NoticeModel
+import com.pinkfry.tech.Tezzo.Model.NoticeModel.NoticeModel
 import com.pinkfry.tech.Tezzo.R
 import kotlinx.android.synthetic.main.adatper_notice.view.*
 
-class NoticeAdapter(private var arrayList:ArrayList<NoticeModel>,var context:Context):RecyclerView.Adapter<NoticeAdapter.MyHolder>(){
+class NoticeAdapter(private var arrayList:ArrayList<NoticeModel>, var context:Context):RecyclerView.Adapter<NoticeAdapter.MyHolder>(){
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyHolder {

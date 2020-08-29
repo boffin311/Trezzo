@@ -8,12 +8,12 @@ import android.view.animation.AnimationUtils
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.pinkfry.tech.Tezzo.Model.DietItem
-import com.pinkfry.tech.Tezzo.Model.ItemItem
+import com.pinkfry.tech.Tezzo.Model.DietModel.DietItem
+import com.pinkfry.tech.Tezzo.Model.DietModel.ItemItem
 import com.pinkfry.tech.Tezzo.R
 import kotlinx.android.synthetic.main.adapter_time_based.view.*
 
-class DietTimeAdapter(var dietItemArray:ArrayList<DietItem>,var context:Context): RecyclerView.Adapter<DietTimeAdapter.MyHolder>(){
+class DietTimeAdapter(var dietItemArray:ArrayList<DietItem>, var context:Context): RecyclerView.Adapter<DietTimeAdapter.MyHolder>(){
 
     class MyHolder(itemView: View):RecyclerView.ViewHolder(itemView){
         val tvTime: TextView =itemView.tvTime

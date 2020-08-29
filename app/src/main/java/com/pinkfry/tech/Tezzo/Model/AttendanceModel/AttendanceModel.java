@@ -1,22 +1,22 @@
-package com.pinkfry.tech.Tezzo.Model;
+package com.pinkfry.tech.Tezzo.Model.AttendanceModel;
 
-import java.io.Serializable;
-import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
-public class DietResponse implements Serializable {
+import java.io.Serializable;
+
+public class AttendanceModel implements Serializable {
 
 	@SerializedName("msg")
-	private List<MsgDiet> msg;
+	private String msg;
 
 	@SerializedName("success")
 	private boolean success;
 
-	public void setMsg(List<MsgDiet> msg){
+	public void setMsg(String msg){
 		this.msg = msg;
 	}
 
-	public List<MsgDiet> getMsg(){
+	public String getMsg(){
 		return msg;
 	}
 
@@ -31,7 +31,7 @@ public class DietResponse implements Serializable {
 	@Override
  	public String toString(){
 		return 
-			"DietResponse{" + 
+			"AttendanceModel{" + 
 			"msg = '" + msg + '\'' + 
 			",success = '" + success + '\'' + 
 			"}";

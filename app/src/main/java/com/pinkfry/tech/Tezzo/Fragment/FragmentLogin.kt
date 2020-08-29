@@ -2,7 +2,6 @@ package com.pinkfry.tech.Tezzo.Fragment
 
 import android.content.Context
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,13 +10,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.pinkfry.tech.Tezzo.Activity.MainActivity
-import com.pinkfry.tech.Tezzo.Activity.NoInternetScreen
-import com.pinkfry.tech.Tezzo.Model.LoginModel
+import com.pinkfry.tech.Tezzo.Model.AuthModel.LoginModel
 import com.pinkfry.tech.Tezzo.R
 import com.pinkfry.tech.Tezzo.RequestInterface.ApiCalls
-import kotlinx.android.synthetic.main.fragment_log_in.*
 import kotlinx.android.synthetic.main.fragment_log_in.view.*
-import kotlinx.android.synthetic.main.frament_get_started.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

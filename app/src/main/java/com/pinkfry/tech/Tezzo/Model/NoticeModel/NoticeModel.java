@@ -1,4 +1,4 @@
-package com.pinkfry.tech.Tezzo.Model;
+package com.pinkfry.tech.Tezzo.Model.NoticeModel;
 
 import com.google.gson.annotations.SerializedName;
 

@@ -7,12 +7,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.pinkfry.tech.Tezzo.Model.DietItem
-import com.pinkfry.tech.Tezzo.Model.MsgDiet
-import com.pinkfry.tech.Tezzo.Model.MsgWorkOut
-import com.pinkfry.tech.Tezzo.Model.SingleDayWorkoutModel
+import com.pinkfry.tech.Tezzo.Model.DietModel.DietItem
+import com.pinkfry.tech.Tezzo.Model.DietModel.MsgDiet
 import com.pinkfry.tech.Tezzo.R
-import kotlinx.android.synthetic.main.activity_diet_plan.*
 import kotlinx.android.synthetic.main.adapter_upper_type_diet.view.*
 import kotlinx.android.synthetic.main.adapter_upper_type_diet.view.rvTimeBased
 

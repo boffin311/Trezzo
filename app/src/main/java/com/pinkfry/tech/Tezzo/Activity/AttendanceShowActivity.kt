@@ -1,7 +1,6 @@
 package com.pinkfry.tech.Tezzo.Activity
 
 import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -14,7 +13,6 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -22,7 +20,7 @@ import com.google.firebase.database.ValueEventListener
 import com.google.zxing.integration.android.IntentIntegrator
 import com.pinkfry.tech.Tezzo.Adapter.AttendanceAdapter
 import com.pinkfry.tech.Tezzo.Dialogue.CustomDialogeProgressBar
-import com.pinkfry.tech.Tezzo.Model.AttendanceModel
+import com.pinkfry.tech.Tezzo.Model.AttendanceModel.AttendanceModel
 import com.pinkfry.tech.Tezzo.R
 import com.pinkfry.tech.Tezzo.RequestInterface.ApiCalls
 import kotlinx.android.synthetic.main.activity_attendance_show.*
@@ -253,7 +251,7 @@ class AttendanceShowActivity : AppCompatActivity(){
     }
     private fun getAttendanceResponse(member_id:String, gymId:String) {
         val retrofit = Retrofit.Builder().addConverterFactory(GsonConverterFactory.create())
-            .baseUrl(" https://api.tezzo.fit/attendance/").build()
+            .baseUrl(resources.getString(R.string.baseUrlServer,"attendance/")).build()
         retrofit.create(ApiCalls::class.java).getAttendanceResult(member_id,gymId).enqueue(object:
             Callback<AttendanceModel> {
             override fun onFailure(call: Call<AttendanceModel>, t: Throwable) {

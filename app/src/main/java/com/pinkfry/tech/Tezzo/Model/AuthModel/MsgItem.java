@@ -1,4 +1,4 @@
-package com.pinkfry.tech.Tezzo.Model;
+package com.pinkfry.tech.Tezzo.Model.AuthModel;
 
 import com.google.gson.annotations.SerializedName;
 

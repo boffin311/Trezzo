@@ -33,4 +33,5 @@
     <string name="confirmPassword">Confirm Password</string>
     <string name="changePassword">Change Password</string>
     <string name="passwordDidNotMatch">The password you enter did not match</string>
+    <string name="baseUrlServer">https://api.tezzo.fit/%1$s</string>
 </resources>

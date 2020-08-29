@@ -1,19 +1,20 @@
 package com.pinkfry.tech.Tezzo.RequestInterface;
 
-import com.pinkfry.tech.Tezzo.Model.AttendanceModel;
-import com.pinkfry.tech.Tezzo.Model.DietResponse;
-import com.pinkfry.tech.Tezzo.Model.LoginModel;
-import com.pinkfry.tech.Tezzo.Model.NoticeModel;
-import com.pinkfry.tech.Tezzo.Model.PlanResponse;
-import com.pinkfry.tech.Tezzo.Model.WorkOutModel;
+import com.pinkfry.tech.Tezzo.Model.AttendanceModel.AttendanceModel;
+import com.pinkfry.tech.Tezzo.Model.DietModel.DietResponse;
+import com.pinkfry.tech.Tezzo.Model.AuthModel.LoginModel;
+import com.pinkfry.tech.Tezzo.Model.FeeModel.PaymentAddedModel;
+import com.pinkfry.tech.Tezzo.Model.NoticeModel.NoticeModel;
+import com.pinkfry.tech.Tezzo.Model.PlanModel.PlanResponse;
+import com.pinkfry.tech.Tezzo.Model.WorkOutModel.WorkOutModel;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
 import retrofit2.Call;
-import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
-import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 public interface ApiCalls {
@@ -35,5 +36,9 @@ public interface ApiCalls {
     @FormUrlEncoded
     @POST("get-plan")
     Call<PlanResponse> getPlans(@Field("gymId")String gymId);
+    @FormUrlEncoded
+    @POST("add-fee")
+    Call<PaymentAddedModel> getPaymentAddStatus(@Field("gymId")String gymId, @Field("for_next")String forNext,
+                                                @Field("user_id")String userId, @Field("payment_obj") JSONObject paymentObj);
 
 }

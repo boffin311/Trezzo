@@ -1,6 +1,7 @@
-package com.pinkfry.tech.Tezzo.Model;
+package com.pinkfry.tech.Tezzo.Model.DietModel;
 
 import com.google.gson.annotations.SerializedName;
+import com.pinkfry.tech.Tezzo.Model.DietModel.DietItem;
 
 import java.io.Serializable;
 import java.util.List;

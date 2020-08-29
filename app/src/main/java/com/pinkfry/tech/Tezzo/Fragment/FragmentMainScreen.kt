@@ -12,31 +12,19 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.auth.FirebaseAuthException
-import com.google.firebase.database.annotations.NotNull
-import com.paytm.pgsdk.PaytmOrder
-import com.paytm.pgsdk.PaytmPGService
-import com.paytm.pgsdk.PaytmPaymentTransactionCallback
 import com.pinkfry.tech.Tezzo.Activity.*
 import com.pinkfry.tech.Tezzo.Adapter.NoticeAdapter
 import com.pinkfry.tech.Tezzo.Dialogue.CustomDialogeProgressBar
-import com.pinkfry.tech.Tezzo.Model.NoticeModel
+import com.pinkfry.tech.Tezzo.Model.NoticeModel.NoticeModel
 import com.pinkfry.tech.Tezzo.R
 import com.pinkfry.tech.Tezzo.RequestInterface.ApiCalls
 import kotlinx.android.synthetic.main.content_main.view.*
 import okhttp3.MediaType
-import okhttp3.OkHttpClient
-import okhttp3.Request
-import okhttp3.RequestBody
-import org.json.JSONException
-import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.io.IOException
 
 
 class FragmentMainScreen: Fragment() {
@@ -98,7 +86,7 @@ class FragmentMainScreen: Fragment() {
 
     private fun getNoticeResponse(gymId: String){
         val retrofit = Retrofit.Builder().addConverterFactory(GsonConverterFactory.create())
-            .baseUrl(" https://api.tezzo.fit/notice/").build()
+            .baseUrl(resources.getString(R.string.baseUrlServer,"notice/")).build()
         retrofit.create(ApiCalls::class.java).getNoticeData(gymId).enqueue(object :Callback<ArrayList<NoticeModel>>{
             override fun onFailure(call: Call<ArrayList<NoticeModel>>, t: Throwable) {
 //                Toast.makeText(context, "failed " , Toast.LENGTH_LONG).show();

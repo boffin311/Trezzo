@@ -9,14 +9,10 @@ import android.view.animation.AnimationUtils
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.pinkfry.tech.Tezzo.Model.DietItem
-import com.pinkfry.tech.Tezzo.Model.ItemItem
-import com.pinkfry.tech.Tezzo.Model.SingleDayWorkoutModel
-import com.pinkfry.tech.Tezzo.Model.WorkoutItem
+import com.pinkfry.tech.Tezzo.Model.WorkOutModel.SingleDayWorkoutModel
+import com.pinkfry.tech.Tezzo.Model.WorkOutModel.WorkoutItem
 import com.pinkfry.tech.Tezzo.R
-import kotlinx.android.synthetic.main.activity_work_out.view.*
 import kotlinx.android.synthetic.main.adapter_day_bases_workout.view.*
-import kotlinx.android.synthetic.main.adapter_time_based.view.*
 
 class WorkoutDayAdapter(var workoutItemArray:ArrayList<SingleDayWorkoutModel>, var context:Context): RecyclerView.Adapter<WorkoutDayAdapter.MyHolder>(){
 

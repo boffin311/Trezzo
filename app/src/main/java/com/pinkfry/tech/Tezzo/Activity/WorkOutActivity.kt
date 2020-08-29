@@ -1,27 +1,21 @@
 package com.pinkfry.tech.Tezzo.Activity
 
-import android.app.Activity
 import android.content.Context
-import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.HorizontalScrollView
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.pinkfry.tech.Tezzo.Adapter.AdapterParticularWorkoutPlan
 import com.pinkfry.tech.Tezzo.Adapter.AdapterShowWorkoutPlans
-import com.pinkfry.tech.Tezzo.Adapter.DietTimeAdapter
-import com.pinkfry.tech.Tezzo.Adapter.WorkoutDayAdapter
 import com.pinkfry.tech.Tezzo.Dialogue.CustomDialogeProgressBar
-import com.pinkfry.tech.Tezzo.Model.*
+import com.pinkfry.tech.Tezzo.Model.WorkOutModel.MsgWorkOut
+import com.pinkfry.tech.Tezzo.Model.WorkOutModel.WorkOutModel
 import com.pinkfry.tech.Tezzo.R
 import com.pinkfry.tech.Tezzo.RequestInterface.ApiCalls
-import kotlinx.android.synthetic.main.activity_diet_plan.*
 import kotlinx.android.synthetic.main.activity_diet_plan.gifView
 import kotlinx.android.synthetic.main.activity_work_out.*
 import kotlinx.android.synthetic.main.no_internet_screen.*
@@ -78,7 +72,7 @@ class WorkOutActivity : AppCompatActivity() {
 
     fun getWorkOutResponse(member_id: String) {
         val retrofit = Retrofit.Builder().addConverterFactory(GsonConverterFactory.create())
-            .baseUrl(" https://api.tezzo.fit/workout/").build()
+            .baseUrl(resources.getString(R.string.baseUrlServer,"workout/")).build()
         retrofit.create(ApiCalls::class.java).getWorkOut(member_id).enqueue(object :
             Callback<WorkOutModel> {
             override fun onFailure(call: Call<WorkOutModel>, t: Throwable) {
